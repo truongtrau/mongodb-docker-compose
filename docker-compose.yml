@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  mongodob:
+    image: mongo:4.0.3
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root_pass
+    ports:
+      - 27017:27017
+    networks:
+      - comp_default
+    volumes:
+      - ./data/db:/data/db
+    container_name: mongodob
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100M"
+        max-file: "3"
+
+networks:
+  comp_default:
+    external: true
